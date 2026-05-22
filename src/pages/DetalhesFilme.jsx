@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import FavoritosContext from '../contexts/FavoritosContext.jsx'
 import ToastContext from '../contexts/ToastContext.jsx'
+import movies from '../data/movies.js'
 
 function DetalhesFilme() {
   const { id } = useParams()
@@ -10,21 +11,14 @@ function DetalhesFilme() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetch('/movies.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('Falha ao carregar os dados do filme.')
-        return res.json()
-      })
-      .then((data) => {
-        const found = data.find((m) => String(m.id) === String(id))
-        if (!found) throw new Error('Filme não encontrado')
-        setMovie(found)
-      })
-      .catch((err) => {
-        const msg = String(err.message || err)
-        setError(msg.includes('Failed') || msg.includes('Network') ? 'Sem conexão com a internet.' : msg)
-      })
-      .finally(() => setLoading(false))
+    const found = movies.find((m) => String(m.id) === String(id))
+    if (!found) {
+      setError('Filme não encontrado')
+      setLoading(false)
+      return
+    }
+    setMovie(found)
+    setLoading(false)
   }, [id])
 
   if (loading) return <main><p>Carregando...</p></main>

@@ -70,10 +70,44 @@ npm run build
 - Teste o tema no Header
 - Efetue login em `/login` (nome qualquer) para acessar `/favoritos` quando autenticado
 
-## Observações
 
 - Os dados de filmes estão mockados em `public/movies.json` para facilitar testes sem depender de API externa.
 
 ---
 
-Se quiser, eu posso criar um repositório remoto (GitHub) e subir o código para você — ou, se já existir um remoto configurado, posso commitar e dar push das mudanças.
+
+## Histórico de Commits (Changelog)
+
+Lista dos commits principais e o que foi alterado em cada passo:
+
+- `cf55d5f` 2026-05-21 — Docs: update README
+	- Atualização da documentação do projeto com descrição completa, instruções de instalação, funcionalidades e este changelog.
+
+- `a045760` 2026-05-21 — Passo 9: Polimento e CSS
+	- Polimento visual do projeto: ajustes de CSS, layout da página de detalhes, adição de toasts visuais para feedback do usuário, mensagens de erro mais amigáveis.
+
+- `cf092d3` 2026-05-21 — Passo 8: Criando o FavoritosContext
+	- Implementado `FavoritosContext` com `FavoritosProvider`, funções `adicionarFavorito` e `removerFavorito`, persistência em `localStorage`.
+	- Integrado com `DetalhesFilme` e a página `Favoritos` para adicionar/remover e exibir favoritos.
+
+- `1ffb035` 2026-05-21 — Passo 7: Página de detalhes do filme
+	- Criada a página `DetalhesFilme.jsx` que usa `useParams` para carregar detalhes do filme selecionado.
+	- Adicionada rota dinâmica `/filme/:id` em `App.jsx`.
+
+- `e134322` 2026-05-21 — Passo 6: Listando filmes na Home
+	- Implementada listagem de filmes em `Home.jsx` usando `fetch` (mock `public/movies.json`), `useState`/`useEffect` e cards com `Link` para os detalhes.
+
+- `47305b5` 2026-05-21 — Passo 5: Criando a Rota Protegida
+	- Criado `RotaProtegida.jsx` que usa `AuthContext` para proteger rotas privadas e configurada em `App.jsx` para `/favoritos`.
+
+- `afa9c0a` 2026-05-21 — Passo 4: Criando o AuthContext (login simulado)
+	- Implementado `AuthContext` com `login`/`logout`, persistência em `localStorage` e formulário de login em `Login.jsx` que usa `useNavigate`.
+
+- `adedc9a` 2026-05-21 — Passo 3: Criando o ThemeContext (tema claro/escuro)
+	- Implementado `ThemeContext` com `ThemeProvider`, botão no `Header` para alternar tema, aplicação do tema no `body` via `useEffect` e variáveis CSS para ambos os temas.
+
+- `a823e91` 2026-05-21 — Passo 2: Configurando as rotas básicas
+	- Criadas páginas iniciais `Home`, `Login`, `Favoritos`, configuração de `BrowserRouter` em `App.jsx` e componente `Header` com `Link`s para navegação.
+
+- `82eeee5` 2026-05-21 — Iniciando o projeto da aula do dia 21/05
+	- Commit inicial com scaffold do template React + Vite e configuração básica do projeto.
