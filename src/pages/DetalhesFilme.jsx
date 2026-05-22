@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
+import FavoritosContext from '../contexts/FavoritosContext.jsx'
 
 function DetalhesFilme() {
   const { id } = useParams()
@@ -25,6 +26,19 @@ function DetalhesFilme() {
   if (loading) return <main><p>Carregando...</p></main>
   if (error) return <main><p className="error-message">{error}</p></main>
 
+  const { adicionarFavorito, removerFavorito, isFavorito } = useContext(FavoritosContext)
+
+  const favorito = movie ? isFavorito(movie.id) : false
+
+  function handleToggleFavorito() {
+    if (!movie) return
+    if (favorito) {
+      removerFavorito(movie.id)
+    } else {
+      adicionarFavorito(movie)
+    }
+  }
+
   return (
     <main>
       <h1>{movie.title}</h1>
@@ -34,7 +48,9 @@ function DetalhesFilme() {
           <p><strong>Diretor:</strong> {movie.director || '—'}</p>
           <p><strong>Elenco:</strong> {Array.isArray(movie.cast) ? movie.cast.join(', ') : (movie.cast || '—')}</p>
           <p><strong>Sinopse:</strong> {movie.plot || movie.description || 'Sem sinopse disponível.'}</p>
-          <button type="button">Adicionar aos favoritos</button>
+          <button type="button" onClick={handleToggleFavorito}>
+            {favorito ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
+          </button>
         </div>
       </div>
     </main>
