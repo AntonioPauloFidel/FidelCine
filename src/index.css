@@ -169,3 +169,49 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.movie-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-border);
+}
+
+.movie-poster {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  min-height: 320px;
+}
+
+.movie-info {
+  padding: 1rem;
+}
+
+.movie-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-h);
+}
+
+.error-message {
+  color: #e02424;
+  margin-top: 1rem;
+}

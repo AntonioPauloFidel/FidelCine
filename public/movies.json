@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "A Jornada da Estrela",
+    "poster": "https://via.placeholder.com/300x450/5c6bc0/ffffff?text=A+Jornada+da+Estrela"
+  },
+  {
+    "id": 2,
+    "title": "Noite de Aventura",
+    "poster": "https://via.placeholder.com/300x450/ef5350/ffffff?text=Noite+de+Aventura"
+  },
+  {
+    "id": 3,
+    "title": "Cidade das Sombras",
+    "poster": "https://via.placeholder.com/300x450/26a69a/ffffff?text=Cidade+das+Sombras"
+  },
+  {
+    "id": 4,
+    "title": "O Segredo do Tempo",
+    "poster": "https://via.placeholder.com/300x450/ffb300/ffffff?text=O+Segredo+do+Tempo"
+  },
+  {
+    "id": 5,
+    "title": "Planeta Perdido",
+    "poster": "https://via.placeholder.com/300x450/8e24aa/ffffff?text=Planeta+Perdido"
+  }
+]
