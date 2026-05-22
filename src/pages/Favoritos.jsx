@@ -1,15 +1,17 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import FavoritosContext from '../contexts/FavoritosContext.jsx'
+import ToastContext from '../contexts/ToastContext.jsx'
 
 function Favoritos() {
   const { favoritos, removerFavorito } = useContext(FavoritosContext)
+  const { showToast } = useContext(ToastContext)
 
   return (
     <main>
       <h1>Favoritos</h1>
       {favoritos.length === 0 ? (
-        <p>Você ainda não adicionou nenhum favorito.</p>
+        <p>Lista de favoritos vazia.</p>
       ) : (
         <div className="movie-grid">
           {favoritos.map((movie) => (
@@ -21,7 +23,13 @@ function Favoritos() {
                 </div>
               </Link>
               <div style={{ padding: '0 1rem 1rem' }}>
-                <button type="button" onClick={() => removerFavorito(movie.id)}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    removerFavorito(movie.id)
+                    showToast('Filme removido dos favoritos')
+                  }}
+                >
                   Remover
                 </button>
               </div>

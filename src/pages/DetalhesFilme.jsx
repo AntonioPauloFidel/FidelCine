@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import FavoritosContext from '../contexts/FavoritosContext.jsx'
+import ToastContext from '../contexts/ToastContext.jsx'
 
 function DetalhesFilme() {
   const { id } = useParams()
@@ -19,7 +20,10 @@ function DetalhesFilme() {
         if (!found) throw new Error('Filme não encontrado')
         setMovie(found)
       })
-      .catch((err) => setError(err.message))
+      .catch((err) => {
+        const msg = String(err.message || err)
+        setError(msg.includes('Failed') || msg.includes('Network') ? 'Sem conexão com a internet.' : msg)
+      })
       .finally(() => setLoading(false))
   }, [id])
 
@@ -27,6 +31,7 @@ function DetalhesFilme() {
   if (error) return <main><p className="error-message">{error}</p></main>
 
   const { adicionarFavorito, removerFavorito, isFavorito } = useContext(FavoritosContext)
+  const { showToast } = useContext(ToastContext)
 
   const favorito = movie ? isFavorito(movie.id) : false
 
@@ -34,8 +39,10 @@ function DetalhesFilme() {
     if (!movie) return
     if (favorito) {
       removerFavorito(movie.id)
+      showToast('Filme removido dos favoritos')
     } else {
       adicionarFavorito(movie)
+      showToast('Filme adicionado aos favoritos')
     }
   }
 

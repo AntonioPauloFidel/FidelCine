@@ -31,7 +31,9 @@ function Home() {
       <p>Veja a lista de filmes disponíveis e clique para ver os detalhes.</p>
 
       {loading && <p>Carregando filmes...</p>}
-      {error && <p className="error-message">{error}</p>}
+      {error && (
+        <p className="error-message">{error.includes('Failed') || error.includes('Network') ? 'Sem conexão com a internet.' : error}</p>
+      )}
 
       {!loading && !error && (
         <div className="movie-grid">

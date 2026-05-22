@@ -215,3 +215,46 @@ code {
   color: #e02424;
   margin-top: 1rem;
 }
+
+/* Details layout */
+.details {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1rem 0 2rem;
+}
+
+.movie-meta {
+  max-width: 600px;
+  text-align: left;
+}
+
+/* Toasts */
+.toast-container {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 9999;
+}
+
+.toast {
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  font-weight: 500;
+}
+
+body[data-theme='claro'] .toast {
+  background: rgba(0,0,0,0.85);
+}
+
+body[data-theme='escuro'] .toast {
+  background: rgba(255,255,255,0.12);
+  color: var(--text-h);
+}
