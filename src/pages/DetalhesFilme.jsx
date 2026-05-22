@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import FavoritosContext from '../contexts/FavoritosContext.jsx'
 import ToastContext from '../contexts/ToastContext.jsx'
-import movies from '../data/movies.js'
 
 function DetalhesFilme() {
   const { id } = useParams()
@@ -11,14 +10,34 @@ function DetalhesFilme() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const found = movies.find((m) => String(m.id) === String(id))
-    if (!found) {
-      setError('Filme não encontrado')
+    const key = import.meta.env.VITE_OMDB_API_KEY
+    if (!key) {
+      setError('Chave OMDb não configurada. Crie um arquivo .env.local com VITE_OMDB_API_KEY.')
       setLoading(false)
       return
     }
-    setMovie(found)
-    setLoading(false)
+
+    fetch(`https://www.omdbapi.com/?apikey=${key}&i=${encodeURIComponent(id)}&plot=full`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Falha ao buscar detalhes do filme na OMDb.')
+        return res.json()
+      })
+      .then((data) => {
+        if (data?.Response !== 'True') {
+          throw new Error(data.Error || 'Filme não encontrado na OMDb.')
+        }
+
+        setMovie({
+          title: data.Title,
+          poster: data.Poster && data.Poster !== 'N/A' ? data.Poster : 'https://via.placeholder.com/300x450?text=Sem+imagem',
+          director: data.Director,
+          cast: data.Actors,
+          plot: data.Plot,
+          imdbID: data.imdbID,
+        })
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false))
   }, [id])
 
   if (loading) return <main><p>Carregando...</p></main>

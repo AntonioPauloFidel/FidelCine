@@ -47,7 +47,7 @@ npm run build
 
 ## Funcionalidades
 
-- Home: lista de filmes (mock em `public/movies.json`)
+- Home: lista de filmes trazida da OMDb API
 - Página de detalhes: informações do filme e botão "Adicionar aos favoritos"
 - Favoritos: lista persistida em `localStorage`
 - Login simulado com navegação (persistência de usuário em `localStorage`)
@@ -71,7 +71,17 @@ npm run build
 - Efetue login em `/login` (nome qualquer) para acessar `/favoritos` quando autenticado
 
 
-- Os dados de filmes estão mockados em `public/movies.json` para facilitar testes sem depender de API externa.
+- A lista de filmes e detalhes são carregados diretamente da OMDb API usando a chave configurada em `.env.local`.
+
+### Usar OMDb
+
+Se você tiver uma chave da OMDb, pode configurá-la em um arquivo `.env.local` na raiz do projeto:
+
+```env
+VITE_OMDB_API_KEY=your_api_key_here
+```
+
+O arquivo `.env.local` está incluído no `.gitignore` e NÃO deve ser commitado. Quando a chave estiver presente, a aplicação tentará enriquecer os filmes com dados da OMDb (sinopse completa, elenco e diretor).
 
 ---
 
